@@ -1,0 +1,80 @@
+{
+  "hosting": {
+    
+    "public": "./",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+
+    "rewrites": [
+      {
+          "source": "/work",
+          "destination": "/work.html",
+          "type": 301
+
+      },
+
+      {
+        "source": "/blog",
+        "destination": "/blog.html",
+        "type": 302
+
+      },
+
+      {
+        "source": "/contact",
+        "destination": "/contact.html",
+        "type": 303
+
+      },
+
+      {
+        "source": "/about",
+        "destination": "/about.html",
+        "type": 306
+      },
+
+      {
+        "source": "/index",
+        "destination": "/index.html",
+        "type": 307
+      }
+
+
+    ],
+    "redirects": [
+      {
+          "source": "/work.html",
+          "destination": "/work",
+          "type": 301
+      },
+
+      {
+        "source": "/blog.html",
+        "destination": "/blog",
+        "type": 302
+
+      },
+      {
+        "source": "/contact.html",
+        "destination": "/contact",
+        "type": 303
+      },
+
+      {
+        "source": "/about.html",
+        "destination": "/about",
+        "type": 306
+      },
+
+      {
+        "source": "/index.html",
+        "destination": "/index",
+        "type": 307
+      }
+    ]
+    
+  }
+}
