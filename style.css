@@ -108,6 +108,8 @@ body {
   
 }
 
+
+
 /* Change the color of links on hover */
 .topnav a:hover {
   background-color: rgba(177, 162, 162, 0.2);
@@ -136,6 +138,30 @@ body {
     border-color: rgb(185, 185, 185);
     border-left-style: solid;
     border-left-width: thin;
+}
+
+.lownav {
+  color: #000000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.lownav a {
+  color: #000000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  
+}
+
+.lownav a:hover {
+  background-color: rgba(177, 162, 162, 0.2);
+  color: black;
+  text-decoration: underline;
+  /*border: 3px solid black;*/
 }
 
 @font-face {
