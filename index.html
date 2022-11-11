@@ -9,17 +9,24 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-	
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
 </head>
 <body style="background-color:#f2f1ea;">
 	
 	<div class="page-header1 mainpage">
 		<div class="background"></div>
 		<div class="topnav fixed-top mainpage" id="myTopnav">
-			<a class="navbar-brand mainbtn" href="index.html">
-				<img class="mainpic" src="src/pinkneon.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
-				insurgentes300
-			  </a>
+			<!--<a class="navbar-brand mainbtn" href="/">-->
+				<a class="mainbtn" href="/">
+				<img class="mainpic" src="src/profile.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+					<div class="mainbtn-text">insurgentes300</div>
+			  	</a>
 			<a href="contact.html">contacto</a>
 			<a href="blog.html">blog</a>
 			<a href="work.html">trabajos</a>
@@ -34,6 +41,7 @@
 
 		<div class="container">
 
+			<!--
 			<div class="col-10">
 				<div class="pendulum">
 					<div class="pendulum_box">
@@ -43,15 +51,30 @@
 						<div class="ball"></div>
 						<div class="ball last"></div>
 						
-					</div>				
-				</div>
+					</div>		
+			</div>
+			-->
 
-		</div>
+
+			<div class="col-10"></div>
+				<canvas id="myCanvas" class="river" ></canvas>
+			</div>
+				
+				
+			<!--<canvas id="myCanvas" width="500px" height="500px" style="position: absolute; top:0; bottom: 0; left: 0; right: 0; margin:auto;"></canvas>-->
+				
 	
-		<div class="lownav content fixed-bottom" style="padding-bottom: 10%; text-align: center;">
-			<a href="">español</a>
-			<a href="">english</a>
-		</div>	
+				
+		</div>
+		
+			<!--
+			<div class="lownav content fixed-bottom" style="padding-bottom: 1.5%; text-align: center;">
+				<a class="active" href="" >español</a>
+				<a href="">english</a>
+			</div>	
+			-->
+
+		
 
 
 		</div>
@@ -93,6 +116,22 @@
 			});
 		</script>
 		
-		
+		<script src="https://unpkg.com/hydra-synth"></script>
+		<script>
+			// create a new hydra-synth instance
+			var hydra = new Hydra({
+			  canvas: document.getElementById("myCanvas"),
+			  detectAudio: false
+			})
+			osc(0.5,1.25).mult(shape(1,0.09).rotate(1.5))
+  				.diff(gradient())
+  				.add(shape(2,2).blend(gradient(1)))
+  				.modulate(noise()
+            	.modulate(noise().scrollY(1,0.0625)))
+  				.blend(o0)
+  				.color(1,-0.5,-0.75)
+  				.out()			
+		  </script>
+
 </body>
 </html>
