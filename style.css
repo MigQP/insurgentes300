@@ -133,6 +133,7 @@ body {
     font-size: 19px;
     /* text-decoration: none; */
     display: flex;
+    justify-content: flex;
 }
 
 .mainbtn-text {
@@ -219,7 +220,10 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .topnav.responsive {position: fixed;}
+  .topnav.responsive {
+    position: fixed;
+    display: inline-grid;
+    }
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
@@ -231,7 +235,13 @@ body {
     /*display: block;*/
     display: inline-flex;
     text-align: left;
+    justify-content: flex-end;
   }
+
+  .topnav a.mainbtn {
+    justify-content: flex-start;
+}
+
 }
 
 /* ACCORDION */
