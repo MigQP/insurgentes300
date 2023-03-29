@@ -37,10 +37,10 @@
 				<img class="mainpic" src="src/profile.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
 					<div class="mainbtn-text">insurgentes300</div>
 			  	</a>
-			<a href="contact.html">contacto</a>
+			<a id="contact" href="contact.html">contacto</a>
 			<a href="blog.html">blog</a>
-			<a class="active" href="work.html">trabajos</a>
-			<a href="about">acerca de</a>
+			<a id="work" class="active" href="work.html">trabajos</a>
+			<a id="about" href="about">acerca de</a>
 			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 			  <i class="fa fa-bars"></i>
 			</a>
@@ -48,6 +48,9 @@
 	
 	
 		<div class="container content" style="margin-top:60px" id="mainaccordion">
+			<br>
+			<button class="lang-button" id="lang-es">español</button> | <button class="lang-button" id="lang-en">english</button>
+
 			<div class="cv_download">
 				<p lang="es"><a href="cv_esp.pdf" target="_blank"><span class="fa fa-file-text-o"></span> Descargar CV</a></p>
 				<p lang="en"><a href="cv_english_05.pdf" target="_blank"><span class="fa fa-file-text-o"></span> Resume</a></p>
@@ -227,15 +230,6 @@
 
 		</div>
 		<br>
-
-
-		<div class="bottom-bar content">
-
-			<select id="lang-switch">
-			    <option value="es">Español</option>
-				<option value="en">English</option>
-			</select>
-		</div>
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
@@ -277,39 +271,76 @@
 
 			})
 
-			
 		})
 		
 	</script>
-	
+
 	<script>
-		$('[lang="en"]').hide();
-				$('[lang="zh"]').hide();
 
-				$('#lang-switch').change(function () {
-				var lang = $(this).val();
-				switch (lang) {
-					case 'en': 
-					$('[lang]').hide();
-					$('[lang="en"]').show();
-					
-					break;
-					case 'es':
-					$('[lang]').hide();
-					$('[lang="es"]').show();
-					break;
-					case 'zh':
-					$('[lang]').hide();
-					$('[lang="zh"]').show();
-					break;
-					default:
-					$('[lang]').hide();
-					$('[lang="en"]').show();
-					
-				}
-		});
+		var langEs = document.getElementById('lang-es');
+
+			langEs.addEventListener('click',function(){
+				$('[lang]').hide();
+				$('[lang="es"]').show();
+				$('#lang-es').addClass('active');
+				$('#lang-es').addClass('active');	
+				$('#lang-en').removeClass('active');	
+				localStorage.setItem('lang', 'es');
+				$('#contact').html('contacto');	
+				$('#work').html('trabajos');	
+				$('#about').html('acerca de');	
+			
+			});
+
+		var langEn = document.getElementById('lang-en');
+
+			langEn.addEventListener('click',function(){
+				$('[lang]').hide();
+				$('[lang="en"]').show();	
+				$('#lang-en').addClass('active');	
+				$('#lang-es').removeClass('active');	
+				localStorage.setItem('lang', 'en');
+				$('#contact').html('contact');
+				$('#work').html('work');	
+				$('#about').html('about');	
+			});
 	</script>
+		<script>
+			$( document ).ready(function() {
+				if (localStorage.getItem('lang') == 'en')
+				{
+					$('[lang]').hide();
+					$('[lang="en"]').show();	
+					$('#lang-en').addClass('active');	
+					$('#lang-es').removeClass('active');
+					$('#contact').html('contact');	
+					$('#work').html('work');	
+					$('#about').html('about');	
+				}
 
+				if (localStorage.getItem('lang') == 'es')
+			{
+				$('[lang]').hide();
+				$('[lang="es"]').show();
+				$('#lang-es').addClass('active');
+				$('#lang-en').removeClass('active');
+				$('#contact').html('contacto');	
+				$('#work').html('trabajos');
+				$('#about').html('acerca de');	
+			}
 
+			if (localStorage.getItem('lang') == null){
+				$('[lang]').hide();
+					$('[lang="en"]').show();	
+					$('#lang-en').addClass('active');	
+					$('#lang-es').removeClass('active');
+					$('#contact').html('contact');	
+					$('#work').html('work');	
+					$('#about').html('about');		
+			}
+				console.log( "ready!" );
+				console.log(localStorage.getItem('lang'));
+			});
+		</script>
 </body>
 </html>

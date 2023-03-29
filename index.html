@@ -37,10 +37,10 @@
 				<img class="mainpic" src="src/profile.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
 					<div class="mainbtn-text">insurgentes300</div>
 			  	</a>
-			<a href="contact.html">contacto</a>
+			<a id="contact" href="contact.html">contacto</a>
 			<a href="blog.html">blog</a>
-			<a href="work.html">trabajos</a>
-			<a href="about">acerca de</a>
+			<a id="work" href="work.html">trabajos</a>
+			<a id="about" href="about">acerca de</a>
 			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 			  <i class="fa fa-bars"></i>
 			</a>
@@ -84,12 +84,14 @@
 
 
 		</div>
-
+			
 		  <script>
 			function myFunction() {
 			  var x = document.getElementById("myTopnav");
 			  if (x.className === "topnav fixed-top mainpage") {
 				x.className += " responsive";
+				
+				
 			  } else {
 				x.className = "topnav fixed-top mainpage";
 			  }
@@ -221,6 +223,7 @@
 		</script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
 		<script>
+			
 			var container;
 			var camera, scene, renderer, clock;
 			var uniforms;
@@ -266,6 +269,7 @@
 				  uniforms.u_mouse.value.x = e.pageX
 				  uniforms.u_mouse.value.y = e.pageY
 				}
+				
 			}
 	
 			function onWindowResize( event ) {
@@ -282,34 +286,11 @@
 			function render() {
 				uniforms.u_time.value += clock.getDelta();
 				renderer.render( scene, camera );
+				
 			}
+			
 		</script>
-
-		<script>
-			$('[lang="en"]').hide();
-					$('[lang="zh"]').hide();
-
-					$('#lang-switch').change(function () {
-					var lang = $(this).val();
-					switch (lang) {
-						case 'en': 
-						$('[lang]').hide();
-						$('[lang="en"]').show();
-						break;
-						case 'es':
-						$('[lang]').hide();
-						$('[lang="es"]').show();
-						break;
-						case 'zh':
-						$('[lang]').hide();
-						$('[lang="zh"]').show();
-						break;
-						default:
-						$('[lang]').hide();
-						$('[lang="en"]').show();
-					}
-			});
-		</script>
+		
 		<!--
 		<script src="https://unpkg.com/hydra-synth"></script>
 		<script>
@@ -328,6 +309,30 @@
   				.out()			
 		  </script>
 		-->
+		<script>
+			$( document ).ready(function() {
+				if (localStorage.getItem('lang') == 'en')
+				{
+					$('#contact').html('contact');	
+					$('#work').html('work');	
+					$('#about').html('about');	
+				}
 
+				if (localStorage.getItem('lang') == 'es')
+			{
+				$('#contact').html('contacto');	
+				$('#work').html('trabajos');
+				$('#about').html('acerca de');	
+			}
+
+			if (localStorage.getItem('lang') == null){
+					$('#contact').html('contact');	
+					$('#work').html('work');	
+					$('#about').html('about');		
+			}
+				console.log( "ready!" );
+				console.log(localStorage.getItem('lang'));
+			});
+		</script>
 </body>
 </html>

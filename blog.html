@@ -35,10 +35,10 @@
 				<img class="mainpic" src="src/profile.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
 					<div class="mainbtn-text">insurgentes300</div>
 			  	</a>
-		<a href="contact.html">contacto</a>
+		<a id="contact" href="contact.html">contacto</a>
 		<a class="active" href="blog.html">blog</a>
-		<a href="work.html">trabajos</a>
-		<a href="about">acerca de</a>
+		<a id="work" href="work.html">trabajos</a>
+		<a id="about" href="about">acerca de</a>
 		<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 		  <i class="fa fa-bars"></i>
 		</a>
@@ -304,7 +304,43 @@
 			x.className = "topnav fixed-top mainpage";
 		  }
 		}
-		</script>		  
-	
+	</script>		  
+	<script>
+		$( document ).ready(function() {
+			if (localStorage.getItem('lang') == 'en')
+			{
+				$('[lang]').hide();
+				$('[lang="en"]').show();	
+				$('#lang-en').addClass('active');	
+				$('#lang-es').removeClass('active');
+				$('#contact').html('contact');	
+				$('#work').html('work');	
+				$('#about').html('about');	
+			}
+
+			if (localStorage.getItem('lang') == 'es')
+		{
+			$('[lang]').hide();
+			$('[lang="es"]').show();
+			$('#lang-es').addClass('active');
+			$('#lang-en').removeClass('active');
+			$('#contact').html('contacto');	
+			$('#work').html('trabajos');
+			$('#about').html('acerca de');	
+		}
+
+		if (localStorage.getItem('lang') == null){
+			$('[lang]').hide();
+				$('[lang="en"]').show();	
+				$('#lang-en').addClass('active');	
+				$('#lang-es').removeClass('active');
+				$('#contact').html('contact');	
+				$('#work').html('work');	
+				$('#about').html('about');		
+		}
+			console.log( "ready!" );
+			console.log(localStorage.getItem('lang'));
+		});
+	</script>
 </body>
 </html>

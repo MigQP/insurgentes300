@@ -36,10 +36,10 @@
 				<img class="mainpic" src="src/profile.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
 					<div class="mainbtn-text">insurgentes300</div>
 			  	</a>
-			<a class="active" href="contact.html">contacto</a>
+			<a id="contact" class="active" href="contact.html">contacto</a>
 			<a href="blog.html">blog</a>
-			<a href="work.html">trabajos</a>
-			<a href="about">acerca de</a>
+			<a id="work" href="work.html">trabajos</a>
+			<a id="about" href="about">acerca de</a>
 			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 			  <i class="fa fa-bars"></i>
 			</a>
@@ -47,17 +47,17 @@
 		
 		<div class="container content" style="margin-top:60px">
 		<div style="padding-left:5px">
-			<div class="networks">
-			
 
-			<p> <!-- 
-				twitter: <a href="https://www.twitter.com/insurgentes300_" target="_blank">@insurgentes300_-->
-				itch.io: <a href="https://insurgentes300.itch.io/" target="_blank">insurgentes300.itch.io</a><br>
-				github: <a href="https://github.com/MigQP" target="_blank">@MigQP</a><br>
-				soundcloud: <a href="https://soundcloud.com/insurgentes300" target="_blank">@insurgentes300</a><br>
-			instagram: <a href="https://www.instagram.com/insurgentes300_" target="_blank">@insurgentes300_</a><br>
-			correo: <a href="mailto: miguel@insurgentes300.com">miguel@insurgentes300.com</a></p>
+			<div style="line-height: 3vh; "class="networks">
+			
+			<p>itch.io: <a href="https://insurgentes300.itch.io/" target="_blank">insurgentes300.itch.io</a></p>
+		    <p>github: <a href="https://github.com/MigQP" target="_blank">@MigQP</a></p>
+			<p>soundcloud: <a href="https://soundcloud.com/insurgentes300" target="_blank">@insurgentes300</a></p>
+			<p>instagram: <a href="https://www.instagram.com/insurgentes300_" target="_blank">@insurgentes300_</a></p>
+			<p lang="es">correo: <a href="mailto: miguel@insurgentes300.com">miguel@insurgentes300.com</a></p>
+			<p lang="en">mail: <a href="mailto: miguel@insurgentes300.com">miguel@insurgentes300.com</a></p>
 			</div>
+			<button class="lang-button" id="lang-es">español</button> | <button class="lang-button" id="lang-en">english</button>	
 		</div>
 	</div>
 	</div>
@@ -71,6 +71,71 @@
 			x.className = "topnav fixed-top mainpage";
 		  }
 		}
+	</script>
+	<script>
+
+		var langEs = document.getElementById('lang-es');
+
+			langEs.addEventListener('click',function(){
+				$('[lang]').hide();
+				$('[lang="es"]').show();
+				$('#lang-es').addClass('active')
+				$('#lang-en').removeClass('active');
+				localStorage.setItem('lang', 'es');
+				$('#contact').html('contacto');	
+				$('#work').html('trabajos');	
+				$('#about').html('acerca de');	
+			});
+
+		var langEn = document.getElementById('lang-en');
+
+			langEn.addEventListener('click',function(){
+				$('[lang]').hide();
+				$('[lang="en"]').show();	
+				$('#lang-en').addClass('active');	
+				$('#lang-es').removeClass('active');
+				localStorage.setItem('lang', 'en');
+				$('#contact').html('contact');
+				$('#work').html('work');	
+				$('#about').html('about');	
+			});
+	</script>
+	<script>
+		$( document ).ready(function() {
+			if (localStorage.getItem('lang') == 'en')
+			{
+				$('[lang]').hide();
+				$('[lang="en"]').show();	
+				$('#lang-en').addClass('active');	
+				$('#lang-es').removeClass('active');
+				$('#contact').html('contact');	
+				$('#work').html('work');	
+				$('#about').html('about');	
+			}
+
+			if (localStorage.getItem('lang') == 'es')
+		{
+			$('[lang]').hide();
+			$('[lang="es"]').show();
+			$('#lang-es').addClass('active');
+			$('#lang-en').removeClass('active');
+			$('#contact').html('contacto');	
+			$('#work').html('trabajos');
+			$('#about').html('acerca de');	
+		}
+
+		if (localStorage.getItem('lang') == null){
+			$('[lang]').hide();
+				$('[lang="en"]').show();	
+				$('#lang-en').addClass('active');	
+				$('#lang-es').removeClass('active');
+				$('#contact').html('contact');	
+				$('#work').html('work');	
+				$('#about').html('about');		
+		}
+			console.log( "ready!" );
+			console.log(localStorage.getItem('lang'));
+		});
 	</script>
 </body>
 </html>
