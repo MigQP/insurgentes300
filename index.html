@@ -104,121 +104,29 @@
     	</script>
 			
 		<script id="fragmentShader" type="x-shader/x-fragment">
-				#ifdef GL_ES
-	precision mediump float;
-	#endif
+			#extension GL_OES_standard_derivatives : enable
 
-	uniform vec2 u_resolution;
-	uniform vec2 u_mouse;
-	uniform float u_time;
-	uniform float transition;
-
-	vec3 hsl2rgb(vec3 c)
-	{
-		vec3 rgb = clamp( abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),6.0)-3.0)-1.0, 0.0, 1.0 );
-
-		return c.z + c.y * (rgb-0.5)*(1.0-abs(2.0*c.z-1.0));
-	}
-
-	vec3 chroma(vec2 st, float t, float s) {
-		vec3 r;
-		
-		vec3 colors[6];
-		colors[0] =  vec3(0,0,0);
-		colors[1] =  vec3(0.1894, 0.189, 0.613);
-		colors[2] =  vec3(0, 0.807, 0.865);
-		colors[3] =  vec3(1);
-		colors[4] =  vec3(0.886, 0.886, 0.2037);
-		colors[5] =  vec3(0.514, 0.0092, 0.0092);
+			precision highp float;
 			
-		float diagonal = 0.1;
-		st *= s;
-		float grad = mod(st.x*3. - st.y + t*.4, 1.000);
-		grad = grad * 7.;
-		
-		int index = int(floor(grad));
-		
-		if(index == 0){
-			r = mix(colors[0], colors[1],mod(grad,1.));
-		} else if (index == 1) {
-			r = mix(colors[1], colors[2],mod(grad,1.));
-		} else if (index == 2) {
-			r = mix(colors[2], colors[3],mod(grad,1.));
-		} else if (index == 3) {
-			r = mix(colors[3], colors[4],mod(grad,1.));
-		} else if (index == 4) {
-			r = mix(colors[4], colors[5],mod(grad,1.));
-		} else if (index == 5) {
-			r = mix(colors[5], colors[0],mod(grad,1.));
-		}
-		
-		return r;
-	}
-
-	float noisyGrad(vec2 st, float t) {
-		float r, r1, r2, r3;
-		
-		float stepFactor1 = mod(floor(t * 3.), 3.) + 1.;
-		float stepFactor2 = mod(floor(t * -7.), 11.960) + 0.768;
-		
-		vec2 step1 = floor(st * 32.0) / 32.;
-		vec2 step2 = floor(st * 32.0) / 32.;
-		vec2 step3 = floor(st * 64.0) / 64.;
-		r1 = mod(step1.x + step1.y * stepFactor1 + stepFactor1 * -1., 1.0);
-		r2 = mod(step2.x + step2.y * stepFactor2 + stepFactor2 * 1.448, 1.0);
-		
-		if((mod(((step3.x*step3.y+.1) + step3.y) * 860., 27.) < 3.) && mod(step3.y, 0.13) < .03){
-			//r3 = 1.;   
-		} else{
-			r3 = 0.;
-		}
-		
-		r = (r2-(1.-r1)) + r3;
-		return r;
-	}
-
-	float circle(vec2 st){
-		float r1 = distance(st, vec2(0.7, -0.3));
-		r1 = 1. - smoothstep(0., 0.9, r1);
-
-		float r2 = distance(st, vec2(0.3, 0.7));
-		r2 = (1. - smoothstep(0., 0.4, r2))*.4;
-		
-		return mix(0.,1.,r1+r2);
-	}
-
-	void main() {
-		vec2 st = gl_FragCoord.xy/u_resolution.xy;
-		st.x *= u_resolution.x/u_resolution.y;
-
-		vec3 color = vec3(0.);
-		
-		///noisy gradient
-		float noisy = clamp(noisyGrad(st,u_time)+.1,0.,1.);
-
-		///chroma aberration
-		vec3 chromaGradient1 = chroma(st, u_time, 1.);
-		vec3 chromaGradient2 = chroma(st, u_time, 2.);
-
-		vec3 colorGradient = vec3(noisy, noisy, noisy*.8+0.188);
-		
-		float mask1, mask2 = 0.;
-		if(noisy > 0.4 && noisy < 0.8){
-			float d = clamp((abs(noisy - 0.6)/0.186), 0., 1.)*0.876;
-			mask1 = 1. - d;
-		} else if(noisy > 0.01 && noisy < 0.388){
-			mask2 = 0.15;
-		}
-		
-		//color = chromaGradient1;
-		color = mix(colorGradient, chromaGradient1, mask1);
-		color = mix(color, chromaGradient2, mask2);
-		
-		float circleMask = circle(st);
-		color +=  hsl2rgb(vec3(circleMask, .0, circleMask))*.2;
-
-		gl_FragColor = vec4(color,1.0);
-	}
+			uniform float u_time;
+			uniform vec2 u_mouse;
+			uniform vec2 u_resolution;
+			
+			void main( void ) {
+			
+				vec2 p = 2.0*( gl_FragCoord.xy / u_resolution.xy ) -1.0;
+			
+				vec3 col = vec3(0);
+				
+				
+				for (int i = 0; i < 100; i++) {
+					float r = float(i)*0.01;
+					
+					col += vec3(1.0)/(12.0+3500.0*(abs(length(sin(p.x*3237.0+p.y*23432.0)*0.050+p.xy-vec2(0,sin(-u_time+float(i)*0.03)*float(i)*0.008))-r))); 
+					
+				}
+				gl_FragColor = vec4(col, 1.0);
+			}
 
 		</script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
