@@ -247,8 +247,12 @@ body {
 
   .topnav a.mainbtn {
     justify-content: flex-start;
-}
+  }
 
+  #about{order:1;}
+  #work{order:2;}
+  #blog{order:3;}
+  #contact{order:4;}
 }
 
 /* ACCORDION */
