@@ -42,7 +42,7 @@
 			<a id="work" href="work.html">trabajos</a>
 			<a id="about" href="about">acerca de</a>
 			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
-			  <i class="fa fa-bars"></i>
+			  <i style="display: none;" class="fa fa-bars"></i>
 			</a>
 		</div>
 		<div id="container"></div>
@@ -73,12 +73,13 @@
 				
 		</div>
 		
-			<!--
-			<div class="lownav content fixed-bottom" style="padding-bottom: 1.5%; text-align: center;">
-				<a class="active" href="" >español</a>
-				<a href="">english</a>
+		
+			<div id ="low" class="lownav content fixed-bottom" style="padding-bottom: 1.5%; text-align: center;">
+				<a class="" href="about" >about / acerca de</a>
+				<a href="work.html">work / trabajos</a>
+				<a href="blog.html">blog</a>
+				<a href="contact.html">contact / contacto</a>
 			</div>	
-			-->
 
 		
 
@@ -90,7 +91,6 @@
 			  var x = document.getElementById("myTopnav");
 			  if (x.className === "topnav fixed-top mainpage") {
 				x.className += " responsive";
-				
 				
 			  } else {
 				x.className = "topnav fixed-top mainpage";
