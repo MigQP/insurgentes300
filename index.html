@@ -220,25 +220,25 @@
 			$(document).ready(function () {
 				// Get the browser language
 				var browserLang = navigator.language || navigator.userLanguage;
-				
+		
 				// Use the language from localStorage if set; otherwise, use the browser language
 				var storedLang = localStorage.getItem('lang') || browserLang;
-
+		
+				// Set the language in localStorage to the browser language
+				localStorage.setItem('lang', browserLang);
 		
 				// Function to update language content
 				function updateLanguage() {
-					if (storedLang.startsWith('es')) {
+					if (browserLang.startsWith('es')) {
 						// If the browser language starts with 'es', set content to Spanish
 						$('#contact').html('contacto');
 						$('#work').html('trabajos');
 						$('#about').html('acerca de');
-						localStorage.setItem('lang', 'es');
 					} else {
 						// Default to English for any other language
 						$('#contact').html('contact');
 						$('#work').html('work');
 						$('#about').html('about');
-						localStorage.setItem('lang', 'en');
 					}
 				}
 		
@@ -249,5 +249,6 @@
 				console.log(browserLang);
 			});
 		</script>
+		
 </body>
 </html>
