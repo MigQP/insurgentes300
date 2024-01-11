@@ -271,6 +271,7 @@ body {
     justify-content: flex-start;
   }
 
+  #menuButton{display:none;}
 
   #about{order:1;}
   #work{order:2;}
@@ -304,6 +305,8 @@ body {
   background-color: none;
   overflow: hidden;
 }
+
+
 
 /*RESPONSIVE IMG */
 .responsive-img {
