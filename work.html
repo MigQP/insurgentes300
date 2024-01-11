@@ -414,42 +414,43 @@
 				$('#about').html('about');	
 			});
 	</script>
-		<script>
-			$( document ).ready(function() {
-				if (localStorage.getItem('lang') == 'en')
-				{
+	
+	<script>
+		$(document).ready(function () {
+			// Get the browser language
+			var browserLang = navigator.language || navigator.userLanguage;
+	
+			// Use the language from localStorage if set; otherwise, use the browser language
+			var storedLang = localStorage.getItem('lang') || browserLang;
+	
+			// Function to update language content and show/hide elements based on language
+			function updateLanguage() {
+				if (storedLang.startsWith('es')) {
 					$('[lang]').hide();
-					$('[lang="en"]').show();	
-					$('#lang-en').addClass('active');	
+					$('[lang="es"]').show();
+					$('#lang-es').addClass('active');
+					$('#lang-en').removeClass('active');
+					$('#contact').html('contacto');
+					$('#work').html('trabajos');
+					$('#about').html('acerca de');
+				} else {
+					$('[lang]').hide();
+					$('[lang="en"]').show();
+					$('#lang-en').addClass('active');
 					$('#lang-es').removeClass('active');
-					$('#contact').html('contact');	
-					$('#work').html('work');	
-					$('#about').html('about');	
+					$('#contact').html('contact');
+					$('#work').html('work');
+					$('#about').html('about');
 				}
-
-				if (localStorage.getItem('lang') == 'es')
-			{
-				$('[lang]').hide();
-				$('[lang="es"]').show();
-				$('#lang-es').addClass('active');
-				$('#lang-en').removeClass('active');
-				$('#contact').html('contacto');	
-				$('#work').html('trabajos');
-				$('#about').html('acerca de');	
 			}
-
-			if (localStorage.getItem('lang') == null){
-				$('[lang]').hide();
-					$('[lang="en"]').show();	
-					$('#lang-en').addClass('active');	
-					$('#lang-es').removeClass('active');
-					$('#contact').html('contact');	
-					$('#work').html('work');	
-					$('#about').html('about');		
-			}
-				console.log( "ready!" );
-				console.log(localStorage.getItem('lang'));
-			});
-		</script>
+	
+			// Call the function to update language content
+			updateLanguage();
+	
+			console.log("ready!");
+			console.log(storedLang);
+		});
+	</script>
+	
 </body>
 </html>

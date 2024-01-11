@@ -217,28 +217,36 @@
 		  </script>
 		-->
 		<script>
-			$( document ).ready(function() {
-				if (localStorage.getItem('lang') == 'en')
-				{
-					$('#contact').html('contact');	
-					$('#work').html('work');	
-					$('#about').html('about');	
+			$(document).ready(function () {
+				// Get the browser language
+				var browserLang = navigator.language || navigator.userLanguage;
+				
+				// Use the language from localStorage if set; otherwise, use the browser language
+				var storedLang = localStorage.getItem('lang') || browserLang;
+
+		
+				// Function to update language content
+				function updateLanguage() {
+					if (storedLang.startsWith('es')) {
+						// If the browser language starts with 'es', set content to Spanish
+						$('#contact').html('contacto');
+						$('#work').html('trabajos');
+						$('#about').html('acerca de');
+						localStorage.setItem('lang', 'es');
+					} else {
+						// Default to English for any other language
+						$('#contact').html('contact');
+						$('#work').html('work');
+						$('#about').html('about');
+						localStorage.setItem('lang', 'en');
+					}
 				}
-
-				if (localStorage.getItem('lang') == 'es')
-			{
-				$('#contact').html('contacto');	
-				$('#work').html('trabajos');
-				$('#about').html('acerca de');	
-			}
-
-			if (localStorage.getItem('lang') == null){
-					$('#contact').html('contact');	
-					$('#work').html('work');	
-					$('#about').html('about');		
-			}
-				console.log( "ready!" );
-				console.log(localStorage.getItem('lang'));
+		
+				// Call the function to update language content
+				updateLanguage();
+		
+				console.log("ready!");
+				console.log(browserLang);
 			});
 		</script>
 </body>
